@@ -1,22 +1,22 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 
-var indexRouter = require('./routes/index');
-var hdmiRouter = require('./routes/hdmi');
-var usbRouter = require('./routes/usb');
+var indexRouter = require("./routes/index");
+var hdmiRouter = require("./routes/hdmi");
+var usbRouter = require("./routes/usb");
 
 var app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
-app.use('/hdmi', hdmiRouter);
-app.use('/usb', usbRouter);
+app.use("/", indexRouter);
+app.use("/hdmi", hdmiRouter);
+app.use("/usb", usbRouter);
 
 module.exports = app;
