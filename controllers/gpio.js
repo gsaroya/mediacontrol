@@ -1,6 +1,3 @@
-var gpio = require("rpi-gpio");
-var gpiop = gpio.promise;
-
 gpioController = {};
 
 // Simulate button press using a pin
