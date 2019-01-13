@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const input = require("../controllers/input");
+const gpio = require("../controllers/gpio");
 
 // GET current input
 router.get("/input", function(req, res, next) {
@@ -12,9 +13,10 @@ router.post("/input", function(req, res, next) {
   const newInput = req.body.input;
   console.log(newInput);
   // TODO: validate
-  input.setSwitch("hdmi", newInput);
-  console.log("post done");
-  res.send("Done");
+  input.setSwitch("hdmi", newInput).then(() => {
+    console.log("post done");
+    res.send("Done");
+  });
 });
 
 // GET input list

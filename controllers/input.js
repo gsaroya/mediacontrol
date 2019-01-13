@@ -2,26 +2,41 @@ const gpio = require("./gpio");
 
 inputController = {};
 
-// Use process of elimination on all analog channels to determine which one is enabled
 inputController.checkInput = source => {
-  // Load analog channels from env
-  config = require("dotenv").config({ path: `.${source}.env` }).parsed;
-  const pins = config.analogChannels;
-
-  let curr;
-  // for pins in analog channels (except the last one)
-  //   if (X <= gpio.read(pin) <= Y) curr = i
-  // if (!curr)
-  //  curr = pins.length() - 1
+  return new Promise((resolve, reject) => {
+    gpio.checkInput(source).then(input => resolve(input));
+  });
 };
 
-inputController.setSwitch = (source, input) => {
+inputController.trigger = source => {
   // Validate that "input" is valid based on source environment
   // Call gpio.trigger(pin) and inputController.checkInput until desired input
 
   // For now just trigger once
-  config = require("dotenv").config({ path: `.${source}.env` }).parsed;
-  gpio.trigger(config.bcmPin);
+  return new Promise((resolve, reject) => {
+    config = require("dotenv").config({ path: `.${source}.env` }).parsed;
+    gpio.trigger(config.bcmPin).then(resolve());
+  });
+};
+
+inputController.setSwitch = (source, input) => {
+  return new Promise((resolve, reject) => {
+    gpio.checkInput(source).then(res => {
+      if (res == String(input)) {
+        resolve();
+      } else {
+        console.log("Re-run");
+        inputController
+          .trigger(source)
+          .then(() => {
+            inputController.setSwitch(source, input);
+          })
+          .then(() => {
+            resolve();
+          });
+      }
+    });
+  });
 };
 
 module.exports = inputController;

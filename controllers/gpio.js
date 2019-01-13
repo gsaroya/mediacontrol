@@ -2,11 +2,36 @@ gpioController = {};
 
 // Simulate button press using a pin
 gpioController.trigger = pin => {
-  const spawn = require("child_process").spawn;
-  const pythonProcess = spawn("python", ["./python/click.py", pin]);
+  return new Promise((resolve, reject) => {
+    try {
+      const spawn = require("child_process").spawn;
+      const command = spawn("python", ["./python/click.py", pin]);
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 
-// Read an analog input to determine if it on/off
-gpioController.read = pin => {};
+// Determine which input is enabled
+gpioController.checkInput = source => {
+  return new Promise((resolve, reject) => {
+    try {
+      console.log("checking...");
+      const spawn = require("child_process").spawn;
+      const command = spawn("python", ["./python/read.py", source]);
+      let result = "";
+      command.stdout.on("data", data => {
+        result += data.toString();
+      });
+      command.on("close", code => {
+        console.log("checked", result);
+        resolve(result.trim());
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
 module.exports = gpioController;
