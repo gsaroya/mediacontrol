@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const input = require("../controllers/input");
+const audio = require("../controllers/audio");
 
-process.env.hdmi = 0;
-process.env.usb = 0;
+process.env.hdmi = "0";
+process.env.usb = "0";
 process.env.audio = false;
 
 // Check check input for both sources and update process env accordingly
@@ -21,11 +22,16 @@ router.post("/refresh", function(req, res, next) {
 });
 
 router.get("/audio", function(req, res, next) {
-  res.send("TODO: Audio Status");
+  res.send(process.env.audio);
 });
 
 router.post("/audio", function(req, res, next) {
-  res.send("TODO: Enable/Disable USB Audio");
+  if (req.body.enabled) {
+    audio.enable();
+  } else {
+    audio.disable();
+  }
+  res.send("Done");
 });
 
 module.exports = router;

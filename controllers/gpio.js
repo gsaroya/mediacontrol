@@ -25,7 +25,6 @@ gpioController.checkInput = source => {
         result += data.toString();
       });
       command.on("close", code => {
-        console.log("checked", result);
         resolve(result.trim());
       });
     } catch (error) {

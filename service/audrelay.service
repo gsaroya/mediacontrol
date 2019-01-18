@@ -1,0 +1,15 @@
+[Unit]
+Description=Audio Relay Service
+
+[Service]
+Type=simple
+SyslogIdentifier=audrelay
+User=pi
+WorkingDirectory=/home/pi/mediacontrol/service
+
+ExecStart=/bin/bash /home/pi/mediacontrol/service/audio.sh
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
