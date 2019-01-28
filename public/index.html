@@ -1,13 +1,104 @@
 <html>
+  <head>
+    <title>Media Control</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="msapplication-config" content="images/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
 
-<body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
-</body>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+    />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+      rel="stylesheet"
+    />
 
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  </head>
+
+  <body>
+    <div class="cards flexcontainer" id="main">
+      <div class="mdc-card mdc-elevation--z18 flexcontainer">
+        <div class="info">
+          <div class="title mdc-typography--headline6">HDMI input: 2</div>
+          <div class="subtitle mdc-typography--subtitle2">Nintendo Switch</div>
+        </div>
+        <div class="mdc-menu-surface--anchor">
+          <button
+            class="mdc-button mdc-button--raised mdc-menu-surface--anchor"
+            id="hdmi-button"
+            onclick="hdmiMenu.open=true"
+          >
+            <span class="mdc-button__label">Change</span>
+          </button>
+          <div class="mdc-menu mdc-menu-surface" tabindex="-1" id="hdmi-menu">
+              <ul
+                class="mdc-list"
+                role="menu"
+                aria-hidden="true"
+                aria-orientation="vertical"
+              >
+                <li class="mdc-list-item" role="menuitem">
+                  <span class="mdc-list-item__text">A Menu Item</span>
+                </li>
+                <li class="mdc-list-item" role="menuitem">
+                  <span class="mdc-list-item__text">Another Menu Item</span>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="mdc-card mdc-elevation--z18 flexcontainer">
+        <div class="info">
+          <div class="title mdc-typography--headline6">USB input: 2</div>
+          <div class="subtitle mdc-typography--subtitle2">Nintendo Switch</div>
+        </div>
+        <button class="mdc-button mdc-button--raised" id="usb-button">
+          <span class="mdc-button__label">Change</span>
+        </button>
+      </div>
+      <div class="mdc-card mdc-elevation--z18 flexcontainer">
+        <div class="info">
+          <div class="title mdc-typography--headline6">USB Audio</div>
+          <div class="subtitle mdc-typography--subtitle2">Enabled</div>
+        </div>
+        <button class="mdc-button mdc-button--raised" id="audio-button">
+          <span class="mdc-button__label">Change</span>
+        </button>
+      </div>
+    </div>
+    <script>
+      [].map.call(document.querySelectorAll(".mdc-button"), function(el) {
+        mdc.ripple.MDCRipple.attachTo(el);
+      });
+
+      const hdmiMenu = mdc.menu.MDCMenu.attachTo(
+        document.querySelector("#hdmi-menu")
+      );
+    </script>
+  </body>
 </html>

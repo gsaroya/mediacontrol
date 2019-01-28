@@ -1,8 +1,44 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.subtitle {
+  color: gray
+}
+.info {
+  padding-right: 1rem;
+}
+.mdc-button {
+  max-width: 150px;
+  background-color: darkcyan !important;
+  overflow: hidden;
+}
+.mdc-card {
+  max-width: 300px;
+  align-items: center;
+  margin: 0.5rem;
+}
+.flexcontainer {
+  padding: 1rem;  
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-family: Roboto, sans-serif;
+  background-image: url('../images/img.jpg');
+  background-size:     cover;
+  background-repeat:   no-repeat;
+}
+
+body > * {
+  background-color: white;
+}
+
+.cards {
+  background: none;
 }
