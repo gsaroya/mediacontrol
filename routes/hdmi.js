@@ -13,10 +13,13 @@ router.post("/input", function(req, res, next) {
   const newInput = req.body.input;
   console.log(newInput);
   // TODO: validate
-  input.setSwitch("hdmi", newInput).then(() => {
-    console.log("post done");
-    res.send("Done");
-  });
+  input
+    .setSwitch("hdmi", newInput)
+    .then(() => {
+      process.env.hdmi = newInput;
+      console.log("post done");
+      res.send("Done");
+    });
 });
 
 // GET input list

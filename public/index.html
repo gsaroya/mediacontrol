@@ -36,7 +36,8 @@
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
       rel="stylesheet"
     />
-
+    <script src="scripts/status.js"></script>
+    <script src="scripts/change.js"></script>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   </head>
 
@@ -44,8 +45,11 @@
     <div class="cards flexcontainer" id="main">
       <div class="mdc-card mdc-elevation--z18 flexcontainer">
         <div class="info">
-          <div class="title mdc-typography--headline6">HDMI input: 2</div>
-          <div class="subtitle mdc-typography--subtitle2">Nintendo Switch</div>
+          <div class="title mdc-typography--headline6" id="hdmi-input"></div>
+          <div
+            class="subtitle mdc-typography--subtitle2"
+            id="hdmi-input-label"
+          ></div>
         </div>
         <div class="mdc-menu-surface--anchor">
           <button
@@ -55,50 +59,93 @@
           >
             <span class="mdc-button__label">Change</span>
           </button>
-          <div class="mdc-menu mdc-menu-surface" tabindex="-1" id="hdmi-menu">
-              <ul
-                class="mdc-list"
-                role="menu"
-                aria-hidden="true"
-                aria-orientation="vertical"
-              >
-                <li class="mdc-list-item" role="menuitem">
-                  <span class="mdc-list-item__text">A Menu Item</span>
-                </li>
-                <li class="mdc-list-item" role="menuitem">
-                  <span class="mdc-list-item__text">Another Menu Item</span>
-                </li>
-              </ul>
-            </div>
+          <div class="mdc-menu mdc-menu-surface" tabindex="-1" id="hdmi-menu" selected="test">
+            <ul
+              class="mdc-list"
+              role="menu"
+              aria-hidden="true"
+              aria-orientation="vertical"
+              id="hdmi-list"
+            ></ul>
+          </div>
         </div>
       </div>
+
       <div class="mdc-card mdc-elevation--z18 flexcontainer">
         <div class="info">
-          <div class="title mdc-typography--headline6">USB input: 2</div>
-          <div class="subtitle mdc-typography--subtitle2">Nintendo Switch</div>
+          <div class="title mdc-typography--headline6" id="usb-input">
+            USB Input: TBD
+          </div>
+          <div class="subtitle mdc-typography--subtitle2" id="usb-input-label">
+            TBD
+          </div>
         </div>
-        <button class="mdc-button mdc-button--raised" id="usb-button">
-          <span class="mdc-button__label">Change</span>
-        </button>
+        <div class="mdc-menu-surface--anchor">
+          <button
+            class="mdc-button mdc-button--raised mdc-menu-surface--anchor"
+            id="usb-button"
+            onclick="usbMenu.open=true"
+          >
+            <span class="mdc-button__label">Change</span>
+          </button>
+          <div class="mdc-menu mdc-menu-surface" tabindex="-1" id="usb-menu">
+            <ul
+              class="mdc-list"
+              role="menu"
+              aria-hidden="true"
+              aria-orientation="vertical"
+              id="usb-list"
+            ></ul>
+          </div>
+        </div>
       </div>
+
       <div class="mdc-card mdc-elevation--z18 flexcontainer">
         <div class="info">
           <div class="title mdc-typography--headline6">USB Audio</div>
-          <div class="subtitle mdc-typography--subtitle2">Enabled</div>
+          <div class="subtitle mdc-typography--subtitle2" id="usb-audio-label">
+            TBD
+          </div>
         </div>
-        <button class="mdc-button mdc-button--raised" id="audio-button">
-          <span class="mdc-button__label">Change</span>
+        <div class="mdc-menu-surface--anchor">
+          <button
+            class="mdc-button mdc-button--raised mdc-menu-surface--anchor"
+            id="audio-button"
+            onclick="audioMenu.open=true"
+          >
+            <span class="mdc-button__label">Change</span>
+          </button>
+          <div class="mdc-menu mdc-menu-surface" tabindex="-1" id="audio-menu">
+            <ul
+              class="mdc-list"
+              role="menu"
+              aria-hidden="true"
+              aria-orientation="vertical"
+              id="usb-list"
+            >
+              <li class="mdc-list-item">
+                <span class="mdc-list-item__text">Enable</span>
+              </li>
+              <li class="mdc-list-item">
+                <span class="mdc-list-item__text">Disable</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdc-card mdc-elevation--z18 flexcontainer">
+        <div class="info">
+          <div class="title mdc-typography--headline6">Last Updated</div>
+          <div class="subtitle mdc-typography--subtitle2" id="refresh-date">
+            TBD
+          </div>
+        </div>
+        <button class="mdc-button mdc-button--raised" id="refresh-button">
+          <span class="mdc-button__label">Refresh</span>
         </button>
       </div>
     </div>
-    <script>
-      [].map.call(document.querySelectorAll(".mdc-button"), function(el) {
-        mdc.ripple.MDCRipple.attachTo(el);
-      });
-
-      const hdmiMenu = mdc.menu.MDCMenu.attachTo(
-        document.querySelector("#hdmi-menu")
-      );
-    </script>
+    <script src="scripts/menu.js"></script>
   </body>
 </html>

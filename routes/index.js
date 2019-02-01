@@ -34,4 +34,14 @@ router.post("/audio", function(req, res, next) {
   res.send("Done");
 });
 
+input
+.checkInput("hdmi")
+.then(res => {
+  process.env.hdmi = res;
+  input.checkInput("usb");
+})
+.then(res => {
+  process.env.usb = res;
+});
+
 module.exports = router;
