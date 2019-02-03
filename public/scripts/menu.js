@@ -17,5 +17,5 @@ usbMenu.listen("MDCMenu:selected", ({ detail }) => {
   changeUsb(detail.index);
 });
 audioMenu.listen("MDCMenu:selected", ({ detail }) => {
-  changeAudio(detail.index ? "enabled" : "disabled");
+  changeAudio(!detail.index);
 });

@@ -33,7 +33,6 @@ xhrHdmiInputs.onreadystatechange = function() {
 
 xhrHdmiInput.onreadystatechange = function() {
   if (this.readyState == 4) {
-    console.log("")
     hdmiInput = JSON.parse(this.responseText);
     document.getElementById(
       "hdmi-input"
@@ -56,7 +55,9 @@ xhrAudio.onreadystatechange = function() {
 
 xhrDate.onreadystatechange = function() {
   if (this.readyState == 4) {
-    document.getElementById("refresh-date").innerText = this.responseText;
+    updated = new Date(this.responseText);
+    lastUpdated = updated.toLocaleString("en-CA");
+    document.getElementById("refresh-date").innerText = lastUpdated;
   }
   loadingDate = false;
 };

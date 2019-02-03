@@ -16,7 +16,7 @@ audioController.startService = () => {
   });
 };
 
-audioController.stopService = () => {
+audioController.disable = () => {
   return new Promise((resolve, reject) => {
     const spawn = require("child_process").spawn;
     const command = spawn("sudo", ["systemctl", "stop", "audrelay.service"]);
@@ -48,10 +48,6 @@ audioController.enable = () => {
         reject(err);
       });
   });
-};
-
-audioController.disable = () => {
-  return audioController.stopService;
 };
 
 module.exports = audioController;
