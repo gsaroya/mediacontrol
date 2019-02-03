@@ -56,8 +56,7 @@ xhrAudio.onreadystatechange = function() {
 
 xhrDate.onreadystatechange = function() {
   if (this.readyState == 4) {
-    lastUpdated = JSON.parse(this.responseText);
-    document.getElementById("refresh-date").innerText = lastUpdated;
+    document.getElementById("refresh-date").innerText = this.responseText;
   }
   loadingDate = false;
 };
@@ -73,8 +72,8 @@ const loadInfo = () => {
   // xhrUsbInput.send();
   xhrAudio.open("GET", "/audio", true);
   xhrAudio.send();
-  // xhrDate.open("GET", "/date", true);
-  // xhrDate.send();
+  xhrDate.open("GET", "/date", true);
+  xhrDate.send();
 };
 
 loadInfo();

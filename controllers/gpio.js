@@ -6,7 +6,12 @@ gpioController.trigger = pin => {
     try {
       const spawn = require("child_process").spawn;
       const command = spawn("python", ["./python/click.py", pin]);
-      resolve();
+      command.on("close", () => {
+        resolve();
+      });
+      command.on("error", err => {
+        reject(err);
+      });
     } catch (error) {
       reject(error);
     }
@@ -14,18 +19,21 @@ gpioController.trigger = pin => {
 };
 
 // Determine which input is enabled
-gpioController.checkInput = source => {
+gpioController.checkInput = name => {
   return new Promise((resolve, reject) => {
     try {
       console.log("checking...");
       const spawn = require("child_process").spawn;
-      const command = spawn("python", ["./python/read.py", source]);
+      const command = spawn("python", ["./python/read.py", name]);
       let result = "";
       command.stdout.on("data", data => {
         result += data.toString();
       });
-      command.on("close", code => {
+      command.on("close", () => {
         resolve(result.trim());
+      });
+      command.on("error", err => {
+        reject(err);
       });
     } catch (error) {
       reject(error);

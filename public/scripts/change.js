@@ -9,8 +9,6 @@ function sleep(ms) {
 
 xhrChangeHdmi.onreadystatechange = async function() {
   if (this.readyState == 4) {
-    await sleep(3000);
-    console.log("loading info now");
     loadInfo();
   }
 };
