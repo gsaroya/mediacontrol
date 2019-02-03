@@ -22,7 +22,7 @@ gpioController.trigger = pin => {
 gpioController.checkInput = name => {
   return new Promise((resolve, reject) => {
     try {
-      console.log("checking...");
+      console.log("checking", name, "...");
       const spawn = require("child_process").spawn;
       const command = spawn("python", ["./python/read.py", name]);
       let result = "";

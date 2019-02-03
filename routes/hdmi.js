@@ -10,11 +10,12 @@ router.get("/input", function(req, res, next) {
 
 // Change current input
 router.post("/input", function(req, res, next) {
+  config = require("dotenv").config({ path: `.hdmi.env` }).parsed.inputs;
   const newInput = req.body.input;
   if (!validateHdmi(newInput)) {
     throw new Error("Invalid input");
   }
-  input.setSwitch("hdmi", newInput).then(() => {
+  input.setSwitch(config, newInput, 0).then(() => {
     process.env.hdmi = newInput;
     res.send("Success");
   });

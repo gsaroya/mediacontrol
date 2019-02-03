@@ -24,29 +24,32 @@ inputController.trigger = config => {
   });
 };
 
-inputController.setSwitch = (config, input, attempts) => {
-  return new Promise((resolve, reject) => {
-    if (attempts >= config.inputs.length * 2) {
-      reject("Too many failed attempts");
-    }
-    gpio.checkInput(source).then(res => {
-      if (res == String(input)) {
-        resolve();
+inputController.setSwitch = async (config, input, attempts) => {
+  const inputs = JSON.parse(config.inputs);
+  if (attempts >= inputs.length * 2) {
+    throw new Error("Too many failed attempts");
+  }
+
+  await gpio
+    .checkInput(config.name)
+    .then(res => {
+      console.log("Got", res, "Wanted", input);
+      if (String(res) == String(input)) {
+        return;
       } else {
         inputController
-          .trigger(source, config)
+          .trigger(config)
           .then(() => {
-            inputController.setSwitch(source, input);
-          })
-          .then(() => {
-            resolve();
+            return inputController.setSwitch(config, input, attempts + 1);
           })
           .catch(err => {
-            reject(err);
+            throw new Error(err.message);
           });
       }
+    })
+    .catch(err => {
+      throw new Error(err.message);
     });
-  });
 };
 
 module.exports = inputController;

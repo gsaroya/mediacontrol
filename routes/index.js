@@ -10,7 +10,13 @@ process.env.date = Date();
 
 // Check check input for both sources and update process env accordingly
 router.post("/refresh", function(req, res, next) {
-  refresh().then(res("Success"));
+  refresh()
+    .then(() => {
+      res.send("Success");
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
 });
 
 router.get("/date", function(req, res, next) {
@@ -22,21 +28,24 @@ router.get("/audio", function(req, res, next) {
 });
 
 router.post("/audio", function(req, res, next) {
-  if (req.body.enabled) {
-    audio.enable().then(res.send("Success"));
-  } else {
-    audio.disable().then(res.send("Success"));
-  }
+  const audioPromise = req.body.enabled ? audio.enable : audio.disable;
+  audioPromise()
+    .then(() => {
+      res.send("Success");
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
 });
 
 const refresh = () => {
   return new Promise((resolve, reject) => {
     process.env.date = Date();
     input
-      .checkInput("hdmi")
+      .checkInput(require("dotenv").config({ path: `.hdmi.env` }).parsed)
       .then(res => {
         process.env.hdmi = res;
-        input.checkInput("usb");
+        input.checkInput(require("dotenv").config({ path: `.usb.env` }).parsed);
       })
       .then(res => {
         process.env.usb = res;
@@ -48,6 +57,6 @@ const refresh = () => {
   });
 };
 
-// refresh();
+refresh();
 
 module.exports = router;
