@@ -45,7 +45,7 @@ const refresh = () => {
       .checkInput(require("dotenv").config({ path: `.hdmi.env` }).parsed)
       .then(res => {
         process.env.hdmi = res;
-        input.checkInput(require("dotenv").config({ path: `.usb.env` }).parsed);
+        return input.checkInput(require("dotenv").config({ path: `.usb.env` }).parsed);
       })
       .then(res => {
         process.env.usb = res;
