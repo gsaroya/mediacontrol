@@ -32,6 +32,7 @@ xhrRefresh.onreadystatechange = function() {
 };
 
 const changeHdmi = input => {
+  showLoading();
   xhrChangeHdmi.open("POST", "hdmi/input", true);
   xhrChangeHdmi.setRequestHeader(
     "Content-Type",
@@ -41,6 +42,7 @@ const changeHdmi = input => {
 };
 
 const changeUsb = input => {
+  showLoading();
   xhrChangeUsb.open("POST", "usb/input", true);
   xhrChangeUsb.setRequestHeader(
     "Content-Type",
@@ -50,6 +52,7 @@ const changeUsb = input => {
 };
 
 const changeAudio = enabled => {
+  showLoading();
   xhrChangeAudio.open("POST", "audio", true);
   xhrChangeAudio.setRequestHeader(
     "Content-Type",
@@ -59,6 +62,21 @@ const changeAudio = enabled => {
 };
 
 const changeRefresh = () => {
+  showLoading();
   xhrRefresh.open("POST", "refresh", true);
   xhrRefresh.send();
+};
+
+const showLoading = () => {
+  loadingHDMI = (loadingUSB = loadingAudio = loadingDate = true);
+  document.getElementById("loading").setAttribute("class", "");
+  waitTillLoaded();
+};
+
+const waitTillLoaded = () => {
+  if (loadingHDMI || loadingUSB || loadingAudio || loadingDate) {
+    setTimeout(waitTillLoaded, 100);
+  } else {
+    document.getElementById("loading").setAttribute("class", "hidden");
+  }
 };

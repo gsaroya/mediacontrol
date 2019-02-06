@@ -22,11 +22,11 @@ const loadMenu = () => {
 
 const waitToLoadMenu = () => {
   if (loadingHDMI || loadingUSB || loadingAudio || loadingDate) {
-    console.log(loadingHDMI, loadingUSB, loadingAudio, loadingDate);
     setTimeout(waitToLoadMenu, 100);
   } else {
     loadMenu();
   }
 };
 
-checkLoaded();
+showLoading();
+waitToLoadMenu();
