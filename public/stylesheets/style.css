@@ -45,6 +45,7 @@ body > * {
 
 #refresh-date {
   font-size: small;
+  max-width: 100px;
 }
 
 #loading {

@@ -16,6 +16,16 @@ xhrHdmiInputs.onload = function() {
   while (hdmiList.childElementCount > 0) {
     hdmiList.removeChild(hdmiList.firstChild);
   }
+
+  let cancelItem = document.createElement("li");
+  cancelItem.setAttribute("class", "mdc-list-item");
+  cancelItem.setAttribute("role", "menuitem");
+  let cancelSpan = document.createElement("span");
+  cancelSpan.setAttribute("class", "mdc-list-item__text");
+  cancelSpan.innerHTML = "✖ Cancel";
+  cancelItem.appendChild(cancelSpan);
+  hdmiList.appendChild(cancelItem);
+
   hdmiInputs = JSON.parse(JSON.parse(this.responseText));
   hdmiInputs.forEach(element => {
     let item = document.createElement("li");
@@ -43,6 +53,16 @@ xhrUsbInputs.onload = function() {
   while (usbList.childElementCount > 0) {
     usbList.removeChild(usbList.firstChild);
   }
+
+  let cancelItem = document.createElement("li");
+  cancelItem.setAttribute("class", "mdc-list-item");
+  cancelItem.setAttribute("role", "menuitem");
+  let cancelSpan = document.createElement("span");
+  cancelSpan.setAttribute("class", "mdc-list-item__text");
+  cancelSpan.innerHTML = "✖ Cancel";
+  cancelItem.appendChild(cancelSpan);
+  usbList.appendChild(cancelItem);
+  
   usbInputs = JSON.parse(JSON.parse(this.responseText));
   usbInputs.forEach(element => {
     let item = document.createElement("li");

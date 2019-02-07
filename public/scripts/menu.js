@@ -10,13 +10,17 @@ const loadMenu = () => {
   audioMenu = mdc.menu.MDCMenu.attachTo(document.querySelector("#audio-menu"));
 
   hdmiMenu.listen("MDCMenu:selected", ({ detail }) => {
+    if (detail.index == 0) return;
     changeHdmi(detail.index);
   });
   usbMenu.listen("MDCMenu:selected", ({ detail }) => {
+    if (detail.index == 0) return;
     changeUsb(detail.index);
   });
   audioMenu.listen("MDCMenu:selected", ({ detail }) => {
-    changeAudio(!detail.index);
+    if (detail.index == 0) return;
+    if (detail.index == 1) changeAudio(true);
+    if (detail.index == 2) changeAudio(false);
   });
 };
 
