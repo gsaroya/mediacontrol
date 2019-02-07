@@ -11,11 +11,11 @@ const loadMenu = () => {
 
   hdmiMenu.listen("MDCMenu:selected", ({ detail }) => {
     if (detail.index == 0) return;
-    changeHdmi(detail.index);
+    changeHdmi(detail.index - 1);
   });
   usbMenu.listen("MDCMenu:selected", ({ detail }) => {
     if (detail.index == 0) return;
-    changeUsb(detail.index);
+    changeUsb(detail.index - 1);
   });
   audioMenu.listen("MDCMenu:selected", ({ detail }) => {
     if (detail.index == 0) return;
