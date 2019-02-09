@@ -25,31 +25,23 @@ inputController.trigger = config => {
 };
 
 inputController.setSwitch = async (config, input, attempts) => {
+  console.log("ATTEMPT", attempts);
   const inputs = JSON.parse(config.inputs);
   if (attempts >= inputs.length * 2) {
     throw new Error("Too many failed attempts");
   }
-
-  await gpio
-    .checkInput(config.name)
-    .then(res => {
-      console.log("Got", res, "Wanted", input);
-      if (String(res) == String(input)) {
-        return;
-      } else {
-        inputController
-          .trigger(config)
-          .then(() => {
-            return inputController.setSwitch(config, input, attempts + 1);
-          })
-          .catch(err => {
-            throw new Error(err.message);
-          });
-      }
-    })
-    .catch(err => {
+  res = await gpio.checkInput(config.name);
+  console.log("Got", res, "Wanted", input);
+  if (String(res) == String(input)) {
+    return;
+  } else {
+    await inputController.trigger(config);
+    try {
+      await inputController.setSwitch(config, input, attempts + 1);
+    } catch (err) {
       throw new Error(err.message);
-    });
+    }
+  }
 };
 
 module.exports = inputController;

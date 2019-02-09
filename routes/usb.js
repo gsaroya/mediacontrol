@@ -15,10 +15,15 @@ router.post("/input", function(req, res, next) {
   if (!validateUsb(newInput)) {
     throw new Error("Invalid input");
   }
-  input.setSwitch(config, newInput, 0).then(() => {
-    process.env.usb = newInput;
-    res.send("Success");
-  });
+  input
+    .setSwitch(config, newInput, 0)
+    .then(() => {
+      process.env.usb = newInput;
+      res.send("Success");
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
 });
 
 // GET input list

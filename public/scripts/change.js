@@ -7,29 +7,21 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-xhrChangeHdmi.onreadystatechange = async function() {
-  if (this.readyState == 4) {
-    loadInfo();
+const onChange = (context) => {
+  if (context.readyState == 4) {
+    if (context.status == 200 || context.status == 304) {
+      loadInfo();
+    } else if (context.status == 500) {
+      hideLoading();
+      alert(context.responseText);
+    }
   }
 };
 
-xhrChangeUsb.onreadystatechange = function() {
-  if (this.readyState == 4) {
-    loadInfo();
-  }
-};
-
-xhrChangeAudio.onreadystatechange = function() {
-  if (this.readyState == 4) {
-    loadInfo();
-  }
-};
-
-xhrRefresh.onreadystatechange = function() {
-  if (this.readyState == 4) {
-    loadInfo();
-  }
-};
+xhrChangeHdmi.onreadystatechange = () => {onChange(xhrChangeHdmi)};
+xhrChangeUsb.onreadystatechange = () => {onChange(xhrChangeUsb)};
+xhrChangeAudio.onreadystatechange = () => {onChange(xhrChangeAudio)};
+xhrRefresh.onreadystatechange = () => {onChange(xhrRefresh)};
 
 const changeHdmi = input => {
   showLoading();
@@ -68,10 +60,14 @@ const changeRefresh = () => {
 };
 
 const showLoading = () => {
-  loadingHDMI = (loadingUSB = loadingAudio = loadingDate = true);
+  loadingHDMI = loadingUSB = loadingAudio = loadingDate = true;
   document.getElementById("loading").setAttribute("class", "");
   waitTillLoaded();
 };
+
+const hideLoading = () => {
+  loadingHDMI = loadingUSB = loadingAudio = loadingDate = false;
+}
 
 const waitTillLoaded = () => {
   if (loadingHDMI || loadingUSB || loadingAudio || loadingDate) {

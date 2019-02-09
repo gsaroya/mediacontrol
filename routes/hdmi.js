@@ -15,10 +15,15 @@ router.post("/input", function(req, res, next) {
   if (!validateHdmi(newInput)) {
     throw new Error("Invalid input");
   }
-  input.setSwitch(config, newInput, 0).then(() => {
-    process.env.hdmi = newInput;
-    res.send("Success");
-  });
+  input
+    .setSwitch(config, newInput, 0)
+    .then(() => {
+      process.env.hdmi = newInput;
+      res.send("Success");
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
 });
 
 // GET input list
