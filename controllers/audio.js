@@ -39,7 +39,7 @@ audioController.enable = () => {
     input
       .setSwitch(config, pi, 0)
       .then(() => {
-        audioController.startService();
+        return audioController.startService();
       })
       .then(() => {
         resolve();
