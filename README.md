@@ -11,12 +11,12 @@ I made this web application to effortlessly control certain aspects of my home e
 - Select between various USB ports for a single USB Hub input (using multi-port USB switch)
 - Capture audio from HDMI devices and stream to wireless USB headset
 
-TODO insert screenshot
+![](https://raw.githubusercontent.com/gsaroya/mediacontrol/master/images/demo.gif)
 
 ### Overview
 
 The following image outlines the all the involved components and how the application ties in.
-TODO insert image
+![](https://raw.githubusercontent.com/gsaroya/mediacontrol/master/images/overview.png)
 
 ## Software
 
