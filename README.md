@@ -21,7 +21,7 @@ The following image outlines the all the involved components and how the applica
 ## Software
 
 ### Environment
-- Raspian (with root access to install services)
+- Raspbian (with root access to install services)
 - Node.JS server
 
 ### Languages/Scripts
@@ -51,7 +51,7 @@ Node Application:
 - USB Switch (One input, four outputs)
 - USB sound card with line-in
 - HDMI line-out extractor
-- Analog-Digital Convertor (ADC: MCP3008)
+- Analog-Digital Converter (ADC: MCP3008)
 - Relay Board (With two or more modules)
 - Raspberry Pi Model B+
 - Wireless USB headset
