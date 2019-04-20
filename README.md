@@ -37,7 +37,6 @@ Audio Relay Service/Script:
 - Update `service/audio.sh` to point to the right input and output devices
 - Ensure the path to `service/audio.sh` in `service/audrelay.service` is correct
 - Install the service: `sudo cp service/audrelay.service /lib/systemd/system/audrelay.service`
-- Enable the service: `sudo systemctl enable audrelay.service`
 
 Node Application:
 - `npm install`
