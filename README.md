@@ -65,7 +65,7 @@ Triggering switches:
 - The script `python/click.py` triggers a relay module through a specified pin via command-line argument
 
 Reading selected inputs:
-- I used [this guide](https://projects.raspberrypi.org/en/projects/physical-computing/15) to connect the understand the _ADC_ pinout and connect it to the _Pi_.
+- I used [this guide](https://projects.raspberrypi.org/en/projects/physical-computing/14) to connect the understand the _ADC_ pinout and connect it to the _Pi_.
 - To tell which input is active in the switches, we can read the voltages of the leds.
 - I soldered a wire to a lead of each of four of the five _HDMI switch_ leds and three of the four _USB switch_ leds. 
   - Next I soldered each wire to a separate channel in the _ADC_.
